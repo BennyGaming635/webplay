@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>WebPlay – CarPlay</title>
+  <link rel="stylesheet" href="css/carplay.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Status bar ─────────────────────────────────────────────────────── -->
+  <header id="status-bar">
+    <span class="time" id="clock">12:00 PM</span>
+    <span class="temp">72°F ☀️</span>
+    <div class="status-icons">
+      <!-- Bluetooth -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17.71 7.71L12 2h-1v7.59L6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l5.71-5.71-4.3-4.29 4.3-4.29zM13 5.83l1.88 1.88L13 9.59V5.83zm1.88 10.46L13 18.17v-3.76l1.88 1.88z"/>
+      </svg>
+      <!-- Signal bars -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2"  y="16" width="3" height="6" rx="1"/>
+        <rect x="7"  y="12" width="3" height="10" rx="1"/>
+        <rect x="12" y="8"  width="3" height="14" rx="1"/>
+        <rect x="17" y="4"  width="3" height="18" rx="1"/>
+      </svg>
+      <!-- Battery -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="1" y="7" width="18" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="3" y="9" width="11" height="6" rx="1"/>
+        <path d="M23 10v4a2 2 0 000-4z"/>
+      </svg>
+    </div>
+  </header>
+
+  <!-- ── Body ───────────────────────────────────────────────────────────── -->
+  <div id="body">
+
+    <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+    <nav id="sidebar">
+      <button class="sidebar-btn active" data-screen="home" aria-label="Home">
+        <div class="icon-wrap">🏠</div>
+        <span class="label">Home</span>
+      </button>
+
+      <div class="sidebar-divider"></div>
+
+      <button class="sidebar-btn" data-screen="maps" aria-label="Maps">
+        <div class="icon-wrap">🗺️</div>
+        <span class="label">Maps</span>
+      </button>
+
+      <button class="sidebar-btn" data-screen="music" aria-label="Music">
+        <div class="icon-wrap">🎵</div>
+        <span class="label">Music</span>
+      </button>
+
+      <button class="sidebar-btn" data-screen="phone" aria-label="Phone">
+        <div class="icon-wrap">📞</div>
+        <span class="label">Phone</span>
+      </button>
+
+      <button class="sidebar-btn" data-screen="messages" aria-label="Messages">
+        <div class="icon-wrap">💬</div>
+        <span class="label">Messages</span>
+      </button>
+
+      <button class="sidebar-btn" data-screen="podcasts" aria-label="Podcasts">
+        <div class="icon-wrap">🎙️</div>
+        <span class="label">Podcasts</span>
+      </button>
+
+      <div class="sidebar-divider"></div>
+
+      <button class="sidebar-btn" data-screen="settings" aria-label="Settings">
+        <div class="icon-wrap">⚙️</div>
+        <span class="label">Settings</span>
+      </button>
+    </nav>
+
+    <!-- ── Main content area ────────────────────────────────────────────── -->
+    <main id="main">
+
+      <!-- ─── HOME ────────────────────────────────────────────────────── -->
+      <section id="screen-home" class="screen active">
+        <p class="home-greeting" id="home-greeting">Good Morning 🌅</p>
+        <p class="home-date" id="home-date"></p>
+
+        <div class="app-grid">
+          <div class="app-icon" data-screen="maps">
+            <div class="icon-bg bg-maps">🗺️</div>
+            <span class="icon-label">Maps</span>
+          </div>
+          <div class="app-icon" data-screen="music">
+            <div class="icon-bg bg-music">🎵</div>
+            <span class="icon-label">Music</span>
+          </div>
+          <div class="app-icon" data-screen="phone">
+            <div class="icon-bg bg-phone">📞</div>
+            <span class="icon-label">Phone</span>
+          </div>
+          <div class="app-icon" data-screen="messages">
+            <div class="icon-bg bg-msgs">💬</div>
+            <span class="icon-label">Messages</span>
+          </div>
+          <div class="app-icon" data-screen="podcasts">
+            <div class="icon-bg bg-podcast">🎙️</div>
+            <span class="icon-label">Podcasts</span>
+          </div>
+          <div class="app-icon" data-screen="maps">
+            <div class="icon-bg bg-waze">🧭</div>
+            <span class="icon-label">Navigation</span>
+          </div>
+          <div class="app-icon" data-screen="music">
+            <div class="icon-bg bg-now">🎧</div>
+            <span class="icon-label">Now Playing</span>
+          </div>
+          <div class="app-icon" data-screen="settings">
+            <div class="icon-bg bg-settings">⚙️</div>
+            <span class="icon-label">Settings</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── MAPS ────────────────────────────────────────────────────── -->
+      <section id="screen-maps" class="screen">
+        <div class="maps-header">
+          <span style="font-size:22px">🗺️</span>
+          <input
+            class="maps-search"
+            type="text"
+            placeholder="Search destinations…"
+            aria-label="Search destinations"
+          />
+        </div>
+        <div class="maps-viewport">
+          <iframe
+            id="map-iframe"
+            title="Map"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-122.52,37.68,-122.35,37.84&layer=mapnik&marker=37.77,-122.43"
+            aria-label="Interactive map"
+          ></iframe>
+
+          <div class="map-overlay-card">
+            <div class="map-eta">
+              <div class="big">18</div>
+              <div class="unit">min</div>
+            </div>
+            <div class="map-eta-sep"></div>
+            <div class="map-dest">
+              <div class="dest-name">Golden Gate Park</div>
+              <div class="dest-dist">4.2 mi · Arrive 12:38 PM</div>
+            </div>
+            <button class="btn-go">Go</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── MUSIC ───────────────────────────────────────────────────── -->
+      <section id="screen-music" class="screen">
+        <div class="music-header">Now Playing</div>
+        <div class="music-body">
+
+          <!-- Artwork + controls -->
+          <div class="music-now">
+            <div class="music-artwork" id="music-artwork">🎵</div>
+
+            <div class="music-info">
+              <div class="track-name"  id="track-name">Loading…</div>
+              <div class="track-artist" id="track-artist"></div>
+            </div>
+
+            <div class="music-progress">
+              <div class="progress-bar-wrap" id="progress-bar-wrap" role="progressbar" aria-label="Track progress">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+              </div>
+              <div class="progress-times">
+                <span id="track-pos">0:00</span>
+                <span id="track-dur">0:00</span>
+              </div>
+            </div>
+
+            <div class="music-controls">
+              <button class="ctrl-btn" id="prev-btn" aria-label="Previous track">⏮</button>
+              <button class="ctrl-btn play" id="play-btn" aria-label="Play/Pause">▶</button>
+              <button class="ctrl-btn" id="next-btn" aria-label="Next track">⏭</button>
+            </div>
+
+            <div class="music-volume">
+              <!-- Vol low -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18.5 12A4.5 4.5 0 0016 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/>
+              </svg>
+              <input type="range" id="vol-slider" min="0" max="100" value="80" aria-label="Volume" />
+              <!-- Vol high -->
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0014 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Queue -->
+          <div class="music-queue">
+            <div class="queue-header">Up Next</div>
+            <div class="queue-list" id="queue-list"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ─── PHONE ────────────────────────────────────────────────────── -->
+      <section id="screen-phone" class="screen">
+        <div class="phone-display">
+          <span id="dial-display"></span><span class="cursor" id="dial-cursor">|</span>
+        </div>
+
+        <div class="dial-grid">
+          <button class="dial-key" data-digit="1"  aria-label="1">
+            <span class="digit">1</span><span class="letters"></span>
+          </button>
+          <button class="dial-key" data-digit="2"  aria-label="2 ABC">
+            <span class="digit">2</span><span class="letters">ABC</span>
+          </button>
+          <button class="dial-key" data-digit="3"  aria-label="3 DEF">
+            <span class="digit">3</span><span class="letters">DEF</span>
+          </button>
+          <button class="dial-key" data-digit="4"  aria-label="4 GHI">
+            <span class="digit">4</span><span class="letters">GHI</span>
+          </button>
+          <button class="dial-key" data-digit="5"  aria-label="5 JKL">
+            <span class="digit">5</span><span class="letters">JKL</span>
+          </button>
+          <button class="dial-key" data-digit="6"  aria-label="6 MNO">
+            <span class="digit">6</span><span class="letters">MNO</span>
+          </button>
+          <button class="dial-key" data-digit="7"  aria-label="7 PQRS">
+            <span class="digit">7</span><span class="letters">PQRS</span>
+          </button>
+          <button class="dial-key" data-digit="8"  aria-label="8 TUV">
+            <span class="digit">8</span><span class="letters">TUV</span>
+          </button>
+          <button class="dial-key" data-digit="9"  aria-label="9 WXYZ">
+            <span class="digit">9</span><span class="letters">WXYZ</span>
+          </button>
+          <button class="dial-key" data-digit="*"  aria-label="*">
+            <span class="digit">*</span><span class="letters"></span>
+          </button>
+          <button class="dial-key" data-digit="0"  aria-label="0 +">
+            <span class="digit">0</span><span class="letters">+</span>
+          </button>
+          <button class="dial-key" data-digit="#"  aria-label="#">
+            <span class="digit">#</span><span class="letters"></span>
+          </button>
+        </div>
+
+        <div class="phone-actions">
+          <button class="call-btn clear" id="dial-clear-btn" aria-label="Delete last digit">⌫</button>
+          <button class="call-btn green" id="dial-call-btn" aria-label="Call">📞</button>
+        </div>
+      </section>
+
+      <!-- ─── MESSAGES ─────────────────────────────────────────────────── -->
+      <section id="screen-messages" class="screen">
+        <div class="msgs-header">Messages</div>
+        <div class="msgs-list" id="msgs-list"></div>
+      </section>
+
+      <!-- ─── PODCASTS ──────────────────────────────────────────────────── -->
+      <section id="screen-podcasts" class="screen">
+        <div class="pod-header">Podcasts</div>
+        <div class="pod-list" id="pod-list"></div>
+      </section>
+
+      <!-- ─── SETTINGS ──────────────────────────────────────────────────── -->
+      <section id="screen-settings" class="screen">
+
+        <div class="settings-section">
+          <div class="settings-section-title">Display</div>
+          <div class="settings-group">
+            <div class="settings-row">
+              <span class="row-icon">🌙</span>
+              <span class="row-label">Dark Mode</span>
+              <div class="toggle on" role="switch" aria-checked="true" aria-label="Dark Mode"></div>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">☀️</span>
+              <span class="row-label">Auto-Brightness</span>
+              <div class="toggle on" role="switch" aria-checked="true" aria-label="Auto-Brightness"></div>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">🗺️</span>
+              <span class="row-label">Map Orientation</span>
+              <span class="row-value">Heading Up</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px">
+          <div class="settings-section-title">Navigation</div>
+          <div class="settings-group">
+            <div class="settings-row">
+              <span class="row-icon">🔊</span>
+              <span class="row-label">Voice Guidance</span>
+              <div class="toggle on" role="switch" aria-checked="true" aria-label="Voice Guidance"></div>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">⛽</span>
+              <span class="row-label">Avoid Toll Roads</span>
+              <div class="toggle" role="switch" aria-checked="false" aria-label="Avoid Toll Roads"></div>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">🚧</span>
+              <span class="row-label">Avoid Highways</span>
+              <div class="toggle" role="switch" aria-checked="false" aria-label="Avoid Highways"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px">
+          <div class="settings-section-title">Audio</div>
+          <div class="settings-group">
+            <div class="settings-row">
+              <span class="row-icon">🎵</span>
+              <span class="row-label">Crossfade</span>
+              <div class="toggle on" role="switch" aria-checked="true" aria-label="Crossfade"></div>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">🔈</span>
+              <span class="row-label">Equalizer</span>
+              <span class="row-value">Flat</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section" style="margin-top:20px; margin-bottom:24px">
+          <div class="settings-section-title">About</div>
+          <div class="settings-group">
+            <div class="settings-row">
+              <span class="row-icon">🚗</span>
+              <span class="row-label">WebPlay CarPlay</span>
+              <span class="row-value">v1.0</span>
+            </div>
+            <div class="settings-row">
+              <span class="row-icon">📱</span>
+              <span class="row-label">iPhone Connected</span>
+              <span class="row-value" style="color:#30d158">● Active</span>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </main><!-- /#main -->
+  </div><!-- /#body -->
+
+  <!-- ── Now Playing mini bar ──────────────────────────────────────────── -->
+  <div id="now-playing-bar" role="region" aria-label="Now Playing">
+    <div class="np-thumb" id="np-thumb">🎵</div>
+    <div class="np-meta">
+      <div class="np-track"  id="np-track">-</div>
+      <div class="np-artist" id="np-artist">-</div>
+    </div>
+    <div class="np-controls">
+      <button class="np-btn" id="np-prev-btn" aria-label="Previous">⏮</button>
+      <button class="np-btn playpause" id="np-play-btn" aria-label="Play/Pause">▶</button>
+      <button class="np-btn" id="np-next-btn" aria-label="Next">⏭</button>
+      <button class="np-btn" id="np-goto-music" aria-label="Open Music" style="font-size:16px">↑</button>
+    </div>
+  </div>
+
+  <!-- ── In-call overlay ───────────────────────────────────────────────── -->
+  <div id="call-overlay" role="dialog" aria-modal="true" aria-label="Active call">
+    <div class="call-avatar">👤</div>
+    <div class="call-name" id="call-name">Unknown</div>
+    <div class="call-status" id="call-status-txt">Calling…</div>
+
+    <div class="call-buttons">
+      <div class="call-action">
+        <button class="ca-btn mute" aria-label="Mute">🎤</button>
+        <span class="ca-label">Mute</span>
+      </div>
+      <div class="call-action">
+        <button class="ca-btn end" id="call-end-btn" aria-label="End call">📵</button>
+        <span class="ca-label">End</span>
+      </div>
+      <div class="call-action">
+        <button class="ca-btn speaker" aria-label="Speaker">🔊</button>
+        <span class="ca-label">Speaker</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /#app -->
+
+<script src="js/carplay.js"></script>
+</body>
+</html>
