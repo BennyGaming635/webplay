@@ -8,7 +8,7 @@
     { emoji:'🎤', title:'Levitating',        artist:'Dua Lipa',         dur:203, bg:'#bf5af2' },
     { emoji:'🎶', title:'Stay',              artist:'The Kid LAROI',    dur:141, bg:'#30d158' },
     { emoji:'🎧', title:'Watermelon Sugar',  artist:'Harry Styles',     dur:174, bg:'#0a84ff' },
-    { emoji:'🎼', title:'drivers license',   artist:'Olivia Rodrigo',   dur:242, bg:'#5ac8fa' },
+    { emoji:'🎼', title:"Driver's License",   artist:'Olivia Rodrigo',   dur:242, bg:'#5ac8fa' },
     { emoji:'🎹', title:'Good 4 U',          artist:'Olivia Rodrigo',   dur:178, bg:'#ff453a' },
     { emoji:'🎺', title:'Peaches',           artist:'Justin Bieber',    dur:198, bg:'#ffd60a' },
   ];
@@ -198,8 +198,7 @@
   }
 
   function startCall() {
-    if (!dialInput && !true) return;
-    const name = dialInput ? formatPhone(dialInput) : 'Unknown';
+    const name = dialInput ? formatPhone(dialInput) : 'Unknown Number';
     $('call-name').textContent = name || 'Unknown Number';
     $('call-status-txt').textContent = 'Calling…';
     $('call-overlay').classList.add('active');
